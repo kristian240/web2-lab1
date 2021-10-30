@@ -1,11 +1,18 @@
-import { StackProps, VStack } from '@chakra-ui/layout';
+import { position } from '@chakra-ui/styled-system';
 import { MapCurrentLocationControl } from 'components/ui/map/MapCurrentLocationControl/MapCurrentLocationControl';
-import React, { FC } from 'react';
+import { useMapContext } from 'contexts/map';
+import React, { FC, Fragment } from 'react';
 
-export const MapControls: FC<StackProps> = (props) => {
+export const MapControls: FC = () => {
+  const { mapRef } = useMapContext();
+
+  const handleShowCurrentLocation = (position: GeolocationPosition) => {
+    mapRef.current.setView([position.coords.latitude, position.coords.longitude], 15);
+  };
+
   return (
-    <VStack position='fixed' zIndex={400} left={4} top={4} {...props}>
-      <MapCurrentLocationControl />
-    </VStack>
+    <Fragment>
+      <MapCurrentLocationControl onShowCurrentLocation={handleShowCurrentLocation} />
+    </Fragment>
   );
 };

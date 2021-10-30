@@ -2,9 +2,11 @@ import { Center, Text, VStack } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
 import { Container } from 'components/Container';
 import { MapControls } from 'components/containers/home/MapControls/MapControls';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { MapContextProvider } from 'contexts/map';
 
 const Index = () => {
+  const mapRef = useRef(null);
   const [MapComponent, setMapComponent] = useState(null);
 
   useEffect(() => {
@@ -28,9 +30,17 @@ const Index = () => {
 
   return (
     <Container minH='100vh'>
-      <MapComponent />
+      <MapContextProvider value={{ mapRef }}>
+        <MapComponent
+          whenCreated={(map) => {
+            mapRef.current = map;
+          }}
+        />
 
-      <MapControls />
+        <VStack position='fixed' zIndex={400} left={4} top={4}>
+          <MapControls />
+        </VStack>
+      </MapContextProvider>
     </Container>
   );
 };

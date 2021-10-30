@@ -4,9 +4,14 @@ import { useCurrentLocation } from 'hooks/useCurrentLocation';
 import React, { FC } from 'react';
 import { convertToDegrees, printDegrees } from 'utils/map/coordinates';
 
-interface IMapCurrentLocationControlProps {}
+interface IMapCurrentLocationControlProps {
+  onShowCurrentLocation?(location: GeolocationPosition): void;
+}
 
-export const MapCurrentLocationControl: FC<IMapCurrentLocationControlProps> = ({ ...rest }) => {
+export const MapCurrentLocationControl: FC<IMapCurrentLocationControlProps> = ({
+  onShowCurrentLocation,
+  ...rest
+}) => {
   const { position, error } = useCurrentLocation();
 
   if (error) {
@@ -29,6 +34,10 @@ export const MapCurrentLocationControl: FC<IMapCurrentLocationControlProps> = ({
     coords: { latitude, longitude },
   } = position;
 
+  const handleButtonClick = () => {
+    onShowCurrentLocation?.(position);
+  };
+
   return (
     <VStack align='start' bgColor='white' p={6} borderRadius='lg'>
       <Heading size='md'>Vaša lokacija</Heading>
@@ -40,7 +49,9 @@ export const MapCurrentLocationControl: FC<IMapCurrentLocationControlProps> = ({
         {[printDegrees(convertToDegrees(Math.abs(longitude))), longitude > 0 ? 'I' : 'Z'].join(' ')}
       </Text>
 
-      <Button>Centriraj moju lokaciju</Button>
+      {onShowCurrentLocation && (
+        <Button onClick={handleButtonClick}>Centriraj moju lokaciju</Button>
+      )}
     </VStack>
   );
 };
