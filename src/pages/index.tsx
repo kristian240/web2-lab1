@@ -1,4 +1,4 @@
-import { Center } from '@chakra-ui/layout';
+import { Center, Text, VStack } from '@chakra-ui/layout';
 import { Spinner } from '@chakra-ui/spinner';
 import { Container } from 'components/Container';
 import { Fragment, useEffect, useState } from 'react';
@@ -22,7 +22,10 @@ const Index = () => {
         </Fragment>
       ) : (
         <Center flex={1}>
-          <Spinner />
+          <VStack>
+            <Spinner />
+            <Text>Učitavanje karte</Text>
+          </VStack>
         </Center>
       )}
     </Container>
