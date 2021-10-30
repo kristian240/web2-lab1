@@ -1,5 +1,7 @@
+import { Center } from '@chakra-ui/layout';
+import { Spinner } from '@chakra-ui/spinner';
 import { Container } from 'components/Container';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 const Index = () => {
   const [MapComponent, setMapComponent] = useState(null);
@@ -14,7 +16,15 @@ const Index = () => {
 
   return (
     <Container minH='100vh' suppressHydrationWarning={true}>
-      {MapComponent && <MapComponent />}
+      {MapComponent ? (
+        <Fragment>
+          <MapComponent />
+        </Fragment>
+      ) : (
+        <Center flex={1}>
+          <Spinner />
+        </Center>
+      )}
     </Container>
   );
 };
