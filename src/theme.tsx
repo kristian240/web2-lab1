@@ -18,4 +18,4 @@ const theme = extendTheme({
   breakpoints,
 });
 
-export default withDefaultColorScheme({ colorScheme: 'green' })(theme);
+export default withDefaultColorScheme({ colorScheme: 'orange' })(theme);
