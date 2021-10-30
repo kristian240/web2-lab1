@@ -21,7 +21,13 @@ export const CurrentPositionPin: FC<ICurrentPositionPin> = ({ position }) => {
 
   return (
     <Fragment>
-      <Circle center={currPosition} pathOptions={{}} radius={position.coords.accuracy} />
+      <Circle
+        center={currPosition}
+        pathOptions={{
+          color: 'orange',
+        }}
+        radius={position.coords.accuracy}
+      />
       <Circle
         center={currPosition}
         pathOptions={{
