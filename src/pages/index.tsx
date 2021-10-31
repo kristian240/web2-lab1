@@ -4,6 +4,7 @@ import { Container } from 'components/Container';
 import { MapControls } from 'components/containers/home/MapControls/MapControls';
 import { useEffect, useRef, useState } from 'react';
 import { MapContextProvider } from 'contexts/map';
+import { AuthSection } from 'components/containers/auth/AuthSection/AuthSection';
 
 const Index = () => {
   const mapRef = useRef(null);
@@ -37,7 +38,9 @@ const Index = () => {
           }}
         />
 
-        <VStack position='fixed' zIndex={400} left={4} top={4}>
+        <VStack position='fixed' zIndex={400} left={4} top={4} maxW='256px'>
+          <AuthSection />
+
           <MapControls />
         </VStack>
       </MapContextProvider>
