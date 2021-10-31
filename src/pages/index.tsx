@@ -4,7 +4,8 @@ import { Container } from 'components/Container';
 import { MapControls } from 'components/containers/home/MapControls/MapControls';
 import { useEffect, useRef, useState } from 'react';
 import { MapContextProvider } from 'contexts/map';
-import { AuthSection } from 'components/containers/auth/AuthSection/AuthSection';
+import { AuthSection } from 'components/containers/home/AuthSection/AuthSection';
+import { LastLoginsSection } from 'components/containers/home/LastLoginsSection/LastLoginsSection';
 
 const Index = () => {
   const mapRef = useRef(null);
@@ -38,10 +39,12 @@ const Index = () => {
           }}
         />
 
-        <VStack position='fixed' zIndex={400} left={4} top={4} maxW='256px'>
+        <VStack position='fixed' zIndex={400} left={4} top={4} maxW='256px' align='stretch'>
           <AuthSection />
 
           <MapControls />
+
+          <LastLoginsSection />
         </VStack>
       </MapContextProvider>
     </Container>
