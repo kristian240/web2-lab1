@@ -1,10 +1,10 @@
 import { Button } from '@chakra-ui/button';
-import { Heading, Text, VStack } from '@chakra-ui/layout';
+import { Heading, StackProps, Text, VStack } from '@chakra-ui/layout';
 import { useCurrentLocation } from 'hooks/useCurrentLocation';
 import React, { FC } from 'react';
 import { convertToDegrees, printDegrees } from 'utils/map/coordinates';
 
-interface IMapCurrentLocationControlProps {
+interface IMapCurrentLocationControlProps extends StackProps {
   onShowCurrentLocation?(location: GeolocationPosition): void;
 }
 
@@ -16,7 +16,7 @@ export const MapCurrentLocationControl: FC<IMapCurrentLocationControlProps> = ({
 
   if (error) {
     return (
-      <VStack align='start' bgColor='white' p={6} borderRadius='lg'>
+      <VStack align='start' bgColor='white' p={6} borderRadius='lg' boxShadow='lg' {...rest}>
         <Text>{error}</Text>
       </VStack>
     );
@@ -24,7 +24,7 @@ export const MapCurrentLocationControl: FC<IMapCurrentLocationControlProps> = ({
 
   if (!position) {
     return (
-      <VStack align='start' bgColor='white' p={6} borderRadius='lg'>
+      <VStack align='start' bgColor='white' p={6} borderRadius='lg' boxShadow='lg' {...rest}>
         <Text>Dohvaćam vašu lokaciju</Text>
       </VStack>
     );
@@ -39,7 +39,7 @@ export const MapCurrentLocationControl: FC<IMapCurrentLocationControlProps> = ({
   };
 
   return (
-    <VStack align='start' bgColor='white' p={6} borderRadius='lg'>
+    <VStack align='start' bgColor='white' p={6} borderRadius='lg' boxShadow='lg' {...rest}>
       <Heading size='md'>Vaša lokacija</Heading>
 
       <Text>

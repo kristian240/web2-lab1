@@ -11,7 +11,7 @@ export const useCurrentLocation = () => {
       return;
     }
 
-    navigator.geolocation.watchPosition(
+    const id = navigator.geolocation.watchPosition(
       (p) => {
         setPosition(p);
       },
@@ -21,10 +21,13 @@ export const useCurrentLocation = () => {
       {
         enableHighAccuracy: false,
         timeout: 5000,
-        // maximumAge: Infinity,
       }
     );
-  }, []);
+
+    return () => {
+      navigator.geolocation.clearWatch(id);
+    };
+  });
 
   return {
     position,

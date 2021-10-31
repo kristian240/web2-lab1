@@ -7,7 +7,9 @@ export const MapControls: FC = () => {
   const { mapRef } = useMapContext();
 
   const handleShowCurrentLocation = (position: GeolocationPosition) => {
-    mapRef.current.setView([position.coords.latitude, position.coords.longitude], 15);
+    mapRef.current.setView([position.coords.latitude, position.coords.longitude], 15, {
+      animate: true,
+    });
   };
 
   return (
