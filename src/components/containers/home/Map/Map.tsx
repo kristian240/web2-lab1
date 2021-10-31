@@ -6,7 +6,6 @@ import { useCurrentLocation } from 'hooks/useCurrentLocation';
 import 'leaflet/dist/leaflet';
 import 'leaflet/dist/leaflet.css';
 import { CurrentPositionPin } from 'components/ui/map/CurrentPositionPin/CurrentPositionPin';
-import { useMapContext } from 'contexts/map';
 
 interface IMapProps {}
 

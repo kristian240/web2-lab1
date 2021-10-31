@@ -54,7 +54,7 @@ export const LastLoginsSection: FC<StackProps> = ({ ...rest }) => {
       <Heading size='md'>Posljenje prijave</Heading>
       <VStack spacing={1} align='start' divider={<Divider />}>
         {lastLogins.map((lastLogin) => (
-          <HStack w='full'>
+          <HStack w='full' key={`${lastLogin.name}-${lastLogin.date}`}>
             <VStack spacing={0} align='start' flex={1}>
               <Text fontWeight='bold'>{lastLogin.name}</Text>
               <Text fontSize='sm'>
