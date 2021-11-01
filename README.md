@@ -9,7 +9,7 @@ _Repo initialized using [example app with Chakra UI and Typescript](https://gith
 - [x] prijava korisnika
 - [x] evidentiranje prijave
 - [x] prikaz karte s oznakama zadnjih pet prijava
-- [ ] prikaz informacije o oznaci na karti.
+- [x] prikaz informacije o oznaci na karti.
 
 ## Opis zadatka
 
