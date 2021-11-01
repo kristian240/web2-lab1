@@ -4,11 +4,11 @@ _Repo initialized using [example app with Chakra UI and Typescript](https://gith
 
 ## Zahtjevi
 
-- [ ] prikaz brojčane vrijednoste trenutne lokacije
-- [ ] prikaz lokacije na karti
-- [ ] prijava korisnika
-- [ ] evidentiranje prijave
-- [ ] prikaz karte s oznakama zadnjih pet prijava
+- [x] prikaz brojčane vrijednoste trenutne lokacije
+- [x] prikaz lokacije na karti
+- [x] prijava korisnika
+- [x] evidentiranje prijave
+- [x] prikaz karte s oznakama zadnjih pet prijava
 - [ ] prikaz informacije o oznaci na karti.
 
 ## Opis zadatka

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { MapContainer } from 'components/ui/map/MapContainer/MapContainer';
-import { Circle, TileLayer } from 'react-leaflet';
+import { Circle, Popup, TileLayer } from 'react-leaflet';
 import { useCurrentLocation } from 'hooks/useCurrentLocation';
 import { CurrentPositionPin } from 'components/ui/map/CurrentPositionPin/CurrentPositionPin';
 import useSWR from 'swr';
@@ -33,7 +33,9 @@ export const Map: FC<IMapProps> = ({ children, ...rest }) => {
             center={lastLocation.location}
             pathOptions={{ color: 'black', fillOpacity: 1 }}
             radius={24}
-          />
+          >
+            <Popup>{lastLocation.name}</Popup>
+          </Circle>
         ))}
 
       {children}
