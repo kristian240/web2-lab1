@@ -20,19 +20,17 @@ export const AuthSection: FC<StackProps> = ({ ...rest }) => {
     if (router.query.code && router.query.state) {
       if (isAuthenticated && position?.coords) {
         const body = {
-          name: user.nickname,
+          name: user.nickname || user.email,
           date: new Date().toISOString(),
           location: [position.coords.latitude, position.coords.longitude],
         };
 
-        console.log(body);
-
         fetch('/api/last-logins', {
           method: 'POST',
           body: JSON.stringify(body),
-        }).then(() => {
-          mutate('/api/last-logins');
-        });
+        })
+          .then((res) => res.json())
+          .then((data) => mutate('/api/last-logins', data));
 
         router.replace(router.pathname);
       }

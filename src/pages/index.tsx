@@ -6,8 +6,9 @@ import { useEffect, useRef, useState } from 'react';
 import { MapContextProvider } from 'contexts/map';
 import { AuthSection } from 'components/containers/home/AuthSection/AuthSection';
 import { LastLoginsSection } from 'components/containers/home/LastLoginsSection/LastLoginsSection';
+import { NextPage } from 'next';
 
-const Index = () => {
+const Index: NextPage = () => {
   const mapRef = useRef(null);
   const [MapComponent, setMapComponent] = useState(null);
 

@@ -1,11 +1,12 @@
 import { IconButton } from '@chakra-ui/button';
 import { InfoIcon } from '@chakra-ui/icons';
 import { Divider, Heading, HStack, StackProps, Text, VStack } from '@chakra-ui/layout';
+import { useMapContext } from 'contexts/map';
 import React, { FC } from 'react';
 import useSWR from 'swr';
 import { convertToDegrees, printDegrees } from 'utils/map/coordinates';
 
-interface LastLoginResponseType {
+export interface LastLoginResponseType {
   lastLogins: Array<{
     name: string;
     location: [number, number];
@@ -14,6 +15,7 @@ interface LastLoginResponseType {
 }
 
 export const LastLoginsSection: FC<StackProps> = ({ ...rest }) => {
+  const { mapRef } = useMapContext();
   const { data, error } = useSWR<LastLoginResponseType>('/api/last-logins', (url) =>
     fetch(url).then((res) => res.json())
   );
@@ -21,7 +23,7 @@ export const LastLoginsSection: FC<StackProps> = ({ ...rest }) => {
   if (error) {
     return (
       <VStack alignItems='stretch' w='full' p={4} bgColor='white' borderRadius='lg' {...rest}>
-        <Heading size='md'>Posljenje prijave</Heading>
+        <Heading size='md'>Posljednje prijave</Heading>
         <Text>Pogreška se dogodila pri dohvatu podataka</Text>
       </VStack>
     );
@@ -30,7 +32,7 @@ export const LastLoginsSection: FC<StackProps> = ({ ...rest }) => {
   if (!data) {
     return (
       <VStack alignItems='stretch' w='full' p={4} bgColor='white' borderRadius='lg' {...rest}>
-        <Heading size='md'>Posljenje prijave</Heading>
+        <Heading size='md'>Posljednje prijave</Heading>
         <Text>Dohvaćam podatke</Text>
       </VStack>
     );
@@ -41,17 +43,15 @@ export const LastLoginsSection: FC<StackProps> = ({ ...rest }) => {
   if (lastLogins.length === 0) {
     return (
       <VStack alignItems='stretch' w='full' p={4} bgColor='white' borderRadius='lg' {...rest}>
-        <Heading size='md'>Posljenje prijave</Heading>
-        <Text>Nema poslijednjih prijava</Text>
+        <Heading size='md'>Posljednje prijave</Heading>
+        <Text>Nema posljednjih prijava</Text>
       </VStack>
     );
   }
 
-  console.log(lastLogins);
-
   return (
     <VStack alignItems='stretch' w='full' p={4} bgColor='white' borderRadius='lg' {...rest}>
-      <Heading size='md'>Posljenje prijave</Heading>
+      <Heading size='md'>Posljednje prijave</Heading>
       <VStack spacing={1} align='start' divider={<Divider />}>
         {lastLogins.map((lastLogin) => (
           <HStack w='full' key={`${lastLogin.name}-${lastLogin.date}`}>
@@ -68,7 +68,16 @@ export const LastLoginsSection: FC<StackProps> = ({ ...rest }) => {
               </Text>
               <Text fontSize='sm'>{new Date(lastLogin.date).toLocaleTimeString()}</Text>
             </VStack>
-            <IconButton variant='ghost' size='sm' aria-label='Prikaži na karti'>
+            <IconButton
+              variant='ghost'
+              size='sm'
+              aria-label='Prikaži na karti'
+              onClick={() =>
+                mapRef.current.setView(lastLogin.location, mapRef.current.getZoom(), {
+                  animate: true,
+                })
+              }
+            >
               <InfoIcon />
             </IconButton>
           </HStack>

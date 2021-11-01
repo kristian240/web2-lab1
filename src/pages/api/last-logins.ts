@@ -3,13 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const data = {
   lastLogins: [
     {
-      name: 'ante',
+      name: 'ivana',
       location: [45.802414365566015, 15.925945198108467],
-      date: new Date().toISOString(),
-    },
-    {
-      name: 'mislav',
-      location: [45.502414365566015, 15.925945198108467],
       date: new Date().toISOString(),
     },
   ],
@@ -27,7 +22,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
     data.lastLogins = [body, ...data.lastLogins].slice(0, 4);
 
-    return res.status(201).end();
+    return res.status(201).json(data);
   }
 
   return res.status(404).end();
